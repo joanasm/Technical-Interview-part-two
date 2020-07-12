@@ -77,7 +77,7 @@ const UsersList = (props) => {
     });
   }
 
-  console.log('RENDERING USERS'); //TODO - remove console.log
+  // console.log('RENDERING USERS');
   return (
     <div>
       {loading && <Loader className={classes.loader} />}

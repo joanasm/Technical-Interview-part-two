@@ -72,7 +72,6 @@ const UserCardContentView = (props) => {
 
   const { user, expanded } = props;
 
-  console.log('RENDERING USER VIEW'); //TODO - remove console.log
   return (
     <>
       <div className={classes.header}>

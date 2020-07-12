@@ -138,7 +138,6 @@ const UserCardContentEdit = (props) => {
     }
   };
 
-  console.log('RENDERING USER EDIT'); //TODO - remove console.log
   return (
     <>
       <div className={classes.header}>

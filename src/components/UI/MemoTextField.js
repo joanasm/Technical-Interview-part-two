@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { TextField } from '@material-ui/core';
 
 const MemoTextField = (props) => {
-  console.log('Rendering Text Field'); //TODO - remove console.log
+  // console.log('Rendering Text Field');
   return <TextField {...props}></TextField>;
 };
 

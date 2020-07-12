@@ -12,7 +12,7 @@ const UserPost = (props) => {
   const classes = useStyles();
   const { post } = props;
 
-  console.log('RENDERING POST'); //TODO - remove console.log
+  // console.log('RENDERING POST');
   return (
     <Card className={classes.card}>
       <CardContent>

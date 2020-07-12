@@ -36,7 +36,7 @@ const UserPosts = (props) => {
     setExpanded(!expanded);
   };
 
-  console.log('RENDERING POSTS'); //TODO - remove console.log
+  // console.log('RENDERING POSTS');
   return (
     <div className={classes.postsContainer}>
       {loading && <Loader className={classes.loader} />}

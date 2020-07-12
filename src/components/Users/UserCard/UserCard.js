@@ -64,7 +64,7 @@ const UserCard = (props) => {
     setExpanded(!expanded);
   };
 
-  console.log('RENDERING USER: ', user.name); //TODO - remove console.log
+  // console.log('RENDERING USER: ', user.name);
   return (
     <Card className={classes.card}>
       <IconButton

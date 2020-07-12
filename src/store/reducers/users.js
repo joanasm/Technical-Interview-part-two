@@ -213,7 +213,7 @@ const onUpdateUserField = (state, action) => {
   } else {
     updatedUser[field] = value;
   }
-  console.log(111, userId, field, value, parent);
+
   const updatedUsers = {
     ...state.users,
     [userId]: {
@@ -221,6 +221,7 @@ const onUpdateUserField = (state, action) => {
       updatedUser
     }
   };
+
   return {
     ...state,
     users: updatedUsers
