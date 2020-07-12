@@ -54,7 +54,6 @@ const UserCard = (props) => {
   };
 
   console.log('RENDERING USER: ', user.name); //TODO - remove console.log
-
   return (
     <Card className={classes.card}>
       <IconButton

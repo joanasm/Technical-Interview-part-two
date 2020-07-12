@@ -1,13 +1,23 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Collapse, IconButton } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import ExpandIcon from '@material-ui/icons/ExpandMore';
+
+import UserPost from './UserPost';
 
 const useStyles = makeStyles((theme) => ({}));
 
 const UserPosts = (props) => {
   const classes = useStyles();
   const { posts, loading, error } = props;
+
+  const [expanded, setExpanded] = useState(true);
+
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
 
   console.log('RENDERING POSTS'); //TODO - remove console.log
   return (
@@ -18,7 +28,31 @@ const UserPosts = (props) => {
           Error getting user's posts! Please try again or reload the page.
         </Alert>
       )}
-      {posts && posts.map((p, idx) => <div key={idx}>{JSON.stringify(p)}</div>)}
+      {!loading && posts && (
+        <>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={toggleExpand}
+            aria-expanded={expanded}
+            aria-label="show more"
+            title="Show More"
+          >
+            <ExpandIcon />
+          </IconButton>
+
+          <Collapse
+            className={classes.collapsibleSection}
+            in={expanded}
+            timeout="auto"
+          >
+            {posts.map((post) => (
+              <UserPost key={post.id} post={post} />
+            ))}
+          </Collapse>
+        </>
+      )}
     </div>
   );
 };
