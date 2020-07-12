@@ -1,13 +1,17 @@
 import React, { memo, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, Collapse, IconButton } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Collapse, IconButton } from '@material-ui/core';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
 
 import UserPost from './UserPost';
+import Loader from '../../UI/Loader';
+import Alert from '../../UI/Alert';
 
 const useStyles = makeStyles((theme) => ({
+  postsContainer: {
+    width: '100%'
+  },
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
@@ -16,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)'
+  },
+  loader: {
+    marginTop: `-${theme.spacing(6)}px`
   }
 }));
 
@@ -31,8 +38,8 @@ const UserPosts = (props) => {
 
   console.log('RENDERING POSTS'); //TODO - remove console.log
   return (
-    <div>
-      {loading && <CircularProgress />}
+    <div className={classes.postsContainer}>
+      {loading && <Loader className={classes.loader} />}
       {error && (
         <Alert severity="error">
           Error getting user's posts! Please try again or reload the page.

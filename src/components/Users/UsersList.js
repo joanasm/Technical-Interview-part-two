@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 
 import UserCard from './UserCard/UserCard';
+import Loader from '../UI/Loader';
+import Alert from '../UI/Alert';
 import * as actions from '../../store/actions/users';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing(4)
+  },
+  loader: {
+    marginTop: '5%'
+  },
+  alert: {
+    marginTop: '5%'
   }
 }));
 
@@ -74,9 +80,9 @@ const UsersList = (props) => {
   console.log('RENDERING USERS'); //TODO - remove console.log
   return (
     <div>
-      {loading && <CircularProgress />}
+      {loading && <Loader className={classes.loader} />}
       {error && (
-        <Alert severity="error">
+        <Alert severity="error" className={classes.alert}>
           Error getting users data! Please reload the page.
         </Alert>
       )}
