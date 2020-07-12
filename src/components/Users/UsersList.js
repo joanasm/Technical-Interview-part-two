@@ -40,40 +40,10 @@ const UsersList = (props) => {
     getUsers();
   }, [getUsers]);
 
-  const editUserHandler = (userId) => {
-    dispatch(actions.editUser(userId));
-  };
-
-  const editUserCancelHandler = (userId) => {
-    dispatch(actions.editUserCancel(userId));
-  };
-
-  const saveUserHandler = (user) => {
-    dispatch(actions.saveUser(user));
-  };
-
-  const getUserPostsHandler = (userId) => {
-    dispatch(actions.fetchUserPosts(userId));
-  };
-
-  const updateUserFieldHandler = (updatedFieldData) => {
-    dispatch(actions.updateUserField(updatedFieldData));
-  };
-
   let userList = null;
   if (!loading && !error && usersData) {
     userList = Object.keys(usersData).map((userId) => {
-      return (
-        <UserCard
-          key={userId}
-          user={usersData[userId]}
-          editUser={editUserHandler}
-          editUserCancel={editUserCancelHandler}
-          saveUser={saveUserHandler}
-          updateUserField={updateUserFieldHandler}
-          getUserPosts={getUserPostsHandler}
-        />
-      );
+      return <UserCard key={userId} userId={userId} />;
     });
   }
 

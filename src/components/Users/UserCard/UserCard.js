@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, IconButton } from '@material-ui/core';
@@ -10,6 +11,8 @@ import UserPosts from '../UserPosts/UserPosts';
 import Loader from '../../UI/Loader';
 import Backdrop from '../../UI/Backdrop';
 import Alert from '../../UI/Alert';
+import { getUserByIdSelector } from '../../../store/selectors/selectUserById';
+import * as actions from '../../../store/actions/users';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -57,11 +60,34 @@ const useStyles = makeStyles((theme) => ({
 const UserCard = (props) => {
   const classes = useStyles();
 
-  const { user } = props;
+  const { userId } = props;
   const [expanded, setExpanded] = useState(false);
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => getUserByIdSelector(state, { userId }));
 
   const toggleExpand = () => {
     setExpanded(!expanded);
+  };
+
+  const editUserHandler = (userId) => {
+    dispatch(actions.editUser(userId));
+  };
+
+  const editUserCancelHandler = (userId) => {
+    dispatch(actions.editUserCancel(userId));
+  };
+
+  const saveUserHandler = (user) => {
+    dispatch(actions.saveUser(user));
+  };
+
+  const getUserPostsHandler = (userId) => {
+    dispatch(actions.fetchUserPosts(userId));
+  };
+
+  const updateUserFieldHandler = (updatedFieldData) => {
+    dispatch(actions.updateUserField(updatedFieldData));
   };
 
   // console.log('RENDERING USER: ', user.name);
@@ -95,17 +121,17 @@ const UserCard = (props) => {
           <UserCardContentView
             user={user}
             expanded={expanded}
-            edit={props.editUser}
-            getPosts={props.getUserPosts}
+            edit={editUserHandler}
+            getPosts={getUserPostsHandler}
           />
         ) : (
           <UserCardContentEdit
             user={user.updatedUser}
             expanded={expanded}
-            updateField={props.updateUserField}
-            save={props.saveUser}
-            cancel={props.editUserCancel}
-            getPosts={props.getUserPosts}
+            updateField={updateUserFieldHandler}
+            save={saveUserHandler}
+            cancel={editUserCancelHandler}
+            getPosts={getUserPostsHandler}
           />
         )}
         <UserPosts
@@ -120,5 +146,5 @@ const UserCard = (props) => {
 
 export default memo(
   UserCard,
-  (prevProps, nextProps) => nextProps.user === prevProps.user
+  (prevProps, nextProps) => nextProps.userId === prevProps.userId
 );
