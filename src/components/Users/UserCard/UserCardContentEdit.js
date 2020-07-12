@@ -83,7 +83,7 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Please enter valid username')
     .test(function (value) {
-      return value.match(/^[a-zA-Z0-9_]{3,}[a-zA-Z]+[0-9]*$/)
+      return value.match(/^[a-zA-Z0-9_.]{3,}[a-zA-Z]+[0-9]*$/)
         ? true
         : this.createError({
             message: 'Please enter valid username',

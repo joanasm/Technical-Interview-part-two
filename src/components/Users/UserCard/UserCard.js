@@ -7,6 +7,9 @@ import ExpandIcon from '@material-ui/icons/ExpandMore';
 import UserCardContentView from './UserCardContentView';
 import UserCardContentEdit from './UserCardContentEdit';
 import UserPosts from '../UserPosts/UserPosts';
+import Loader from '../../UI/Loader';
+import Backdrop from '../../UI/Backdrop';
+import Alert from '../../UI/Alert';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -40,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)'
+  },
+  loader: {
+    position: 'absolute',
+    top: '40%',
+    zIndex: '200'
+  },
+  alert: {
+    marginBottom: theme.spacing(2)
   }
 }));
 
@@ -69,6 +80,17 @@ const UserCard = (props) => {
       </IconButton>
 
       <CardContent className={classes.cardContent}>
+        {user.loadingState?.saveUserInProgress && (
+          <>
+            <Backdrop />
+            <Loader className={classes.loader} />
+          </>
+        )}
+        {user.loadingState?.saveUserError && (
+          <Alert severity="error" className={classes.alert}>
+            Error saving user! Please try again.
+          </Alert>
+        )}
         {!user.updatedUser ? (
           <UserCardContentView
             user={user}
