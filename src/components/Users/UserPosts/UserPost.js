@@ -16,10 +16,10 @@ const UserPost = (props) => {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography variant="h6" color="primary" className={classes.title}>
+        <Typography variant="h6" color="primary">
           {post.title}{' '}
         </Typography>
-        <Typography className={classes.body}> {post.body} </Typography>
+        <Typography> {post.body} </Typography>
       </CardContent>
     </Card>
   );

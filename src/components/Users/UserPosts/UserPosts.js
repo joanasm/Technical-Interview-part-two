@@ -7,7 +7,17 @@ import ExpandIcon from '@material-ui/icons/ExpandMore';
 
 import UserPost from './UserPost';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  }
+}));
 
 const UserPosts = (props) => {
   const classes = useStyles();
@@ -42,11 +52,7 @@ const UserPosts = (props) => {
             <ExpandIcon />
           </IconButton>
 
-          <Collapse
-            className={classes.collapsibleSection}
-            in={expanded}
-            timeout="auto"
-          >
+          <Collapse in={expanded} timeout="auto">
             {posts.map((post) => (
               <UserPost key={post.id} post={post} />
             ))}
