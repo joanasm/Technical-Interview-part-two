@@ -93,7 +93,6 @@ const UserCardContentView = (props) => {
         className={classes.collapsibleSection}
         in={expanded}
         timeout="auto"
-        unmountOnExit
       >
         <Divider className={classes.divider} />
         <div className={classes.detailsRow}>
